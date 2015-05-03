@@ -75,10 +75,12 @@ namespace MechaWarner
             {
 				if (!alreadySplit)
 				{
-					Game1.objectsToAdd.Add(new Enemy(position, size / 2, true));
-					Game1.objectsToAdd.Add(new Enemy(position, size / 2, true));
-					Game1.objectsToAdd.Add(new Enemy(position, size / 2, true));
-					Game1.objectsToRemove.Add(this);
+                    float numTurtles = (float)Game1.rand.Next(1, 4);
+                    for (int i = 0; i < numTurtles; i++)
+                    {
+                        Game1.objectsToAdd.Add(new Enemy(position, size / 2, true));
+                    }
+                    Game1.objectsToRemove.Add(this);
 				}
 				else
 				{

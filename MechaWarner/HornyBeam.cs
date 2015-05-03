@@ -37,6 +37,9 @@ namespace MechaWarner
 					}
 				}
 			}
+
+            if (position.X > 480 || position.Y > 270)
+                Game1.objectsToRemove.Add(this);
 		}
 
 		public override void Render()

@@ -141,7 +141,7 @@ namespace MechaWarner
                 oldTurtleTime = gameTime.TotalGameTime.TotalMilliseconds;
                 oldTurtleTimeSet = true;
             }
-            if (gameTime.TotalGameTime.TotalMilliseconds - oldTurtleTime > 1000)
+            if (gameTime.TotalGameTime.TotalMilliseconds - oldTurtleTime > 3000)
             {
                 Vector2[] corners = { new Vector2(0, 0), new Vector2(0, 270), new Vector2(480, 0), new Vector2(480, 270) };
                 Enemy e = new Enemy(corners[rand.Next(0, 3)], new Vector2(64, 64));
@@ -154,7 +154,7 @@ namespace MechaWarner
                 oldFlyTime = gameTime.TotalGameTime.TotalMilliseconds;
                 oldFlyTimeSet = true;
             }
-            if (gameTime.TotalGameTime.TotalMilliseconds - oldFlyTime > 10000)
+            if (gameTime.TotalGameTime.TotalMilliseconds - oldFlyTime > 8000)
             {
                 Vector2[] corners = { new Vector2(0, 0), new Vector2(0, 270), new Vector2(480, 0), new Vector2(480, 270) };
                 Fly f = new Fly(corners[rand.Next(0, 3)], new Vector2(9, 9));
