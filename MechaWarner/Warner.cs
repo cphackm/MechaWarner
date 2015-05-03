@@ -16,6 +16,8 @@ namespace MechaWarner
 		public const float MAX_SPEED = 200.0f;
 		public Vector2 velocity;
 		public float angle;
+        public Boolean isInvincible;
+        float timer;
 
 		public Warner(Vector2 Position) : base(Position, new Vector2(33, 33), 5)
 		{
@@ -62,6 +64,18 @@ namespace MechaWarner
 			{
 				position.Y -= Math.Sign(position.Y) * (270 + size.Y / 2);
 			}
+
+            if(isInvincible)
+            {
+                timer -= DT;
+                if (timer < 0)
+                {
+                    isInvincible = false;
+                    timer = 1;
+                }
+
+            }
+
 		}
 
 		public override void Render()

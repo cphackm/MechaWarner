@@ -33,6 +33,15 @@ namespace MechaWarner
                 position.Y += 270 + (size.Y / 2);
             else
                 position += velocity * DT;
+
+            if(Vector2.Distance(position, Game1.warner.position) < 24)
+            {
+                if (!Game1.warner.isInvincible)
+                {
+                    Game1.warner.health -= 1;
+                    Game1.warner.isInvincible = true;
+                }
+            }
 		}
 
 		public override void Render()
