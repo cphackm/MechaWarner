@@ -25,16 +25,26 @@ namespace MechaWarner
 		float dt;
 
 		// List of game objects to keep track of
-		List<GameObject> gameObjects;
+		public static List<GameObject> gameObjects;
+		public static Warner warner;
+
+		// Render target for scaling
+		RenderTarget2D smallTarget;
 
 		public Game1() : base()
 		{
 			// Create the graphics and content
 			graphics = new GraphicsDeviceManager(this);
+			graphics.PreferredBackBufferWidth = 960;
+			graphics.PreferredBackBufferHeight = 540;
 			Content.RootDirectory = "Content";
 
 			// Create the list of game objects
 			gameObjects = new List<GameObject>();
+
+			// Create warner
+			warner = new Warner(new Vector2(240, 135));
+			gameObjects.Add(warner);
 		}
 
 		/// <summary>
@@ -59,6 +69,9 @@ namespace MechaWarner
 		{
 			// Create a new SpriteBatch, which can be used to draw textures.
 			spriteBatch = new SpriteBatch(GraphicsDevice);
+
+			// Create the small target
+			smallTarget = new RenderTarget2D(GraphicsDevice, 480, 270);
 
 			// Load content here
 			RenderManager.LoadTexture("mechawarner", "warner_normal");
@@ -89,6 +102,12 @@ namespace MechaWarner
 			// Update the delta time
 			dt = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000.0f;
 
+			// Update all game objects
+			foreach (GameObject g in gameObjects)
+			{
+				g.Update(dt);
+			}
+
 			base.Update(gameTime);
 		}
 
@@ -100,7 +119,25 @@ namespace MechaWarner
 		{
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
-			// TODO: Add your drawing code here
+			// Begin the sprite batch operation
+			GraphicsDevice.SetRenderTarget(smallTarget);
+			GraphicsDevice.Clear(Color.DarkBlue);
+			RenderManager.sb.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
+
+			// Draw all game objects
+			foreach (GameObject g in gameObjects)
+			{
+				g.Render();
+			}
+
+			// End the sprite batch operation
+			RenderManager.sb.End();
+
+			// Draw the small target scaled up onto the back buffer
+			GraphicsDevice.SetRenderTarget(null);
+			RenderManager.sb.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
+			RenderManager.sb.Draw(smallTarget, new Rectangle(0, 0, 960, 540), Color.White);
+			RenderManager.sb.End();
 
 
 			base.Draw(gameTime);
