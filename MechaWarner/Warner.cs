@@ -17,12 +17,14 @@ namespace MechaWarner
 		public Vector2 velocity;
 		public float angle;
         public Boolean isInvincible = true;
+		public bool isSpaceHeld;
         float timer;
 
 		public Warner(Vector2 Position) : base(Position, new Vector2(33, 33), 5)
 		{
 			velocity = Vector2.Zero;
 			angle = 0.0f;
+			isSpaceHeld = false;
 		}
 
 		public override void Update(float DT)
@@ -67,6 +69,20 @@ namespace MechaWarner
 			if (position.Y > 270 + size.Y / 2 || position.Y < -(size.Y / 2))
 			{
 				position.Y -= Math.Sign(position.Y) * (270 + size.Y / 2);
+			}
+
+			// Firing
+			if (k.IsKeyDown(Keys.Space))
+			{
+				if (!isSpaceHeld)
+				{
+					Game1.objectsToAdd.Add(new HornyBeam(position, angle));
+				}
+				isSpaceHeld = true;
+			}
+			else
+			{
+				isSpaceHeld = false;
 			}
 
 			// Create a bubble trail
