@@ -34,7 +34,7 @@ namespace MechaWarner
             else
                 position += velocity * DT;
 
-            if(Vector2.Distance(position, Game1.warner.position) < 24)
+            if(Vector2.Distance(position, Game1.warner.position) < 30)
             {
                 if (!Game1.warner.isInvincible)
                 {
@@ -46,7 +46,7 @@ namespace MechaWarner
 
 		public override void Render()
 		{
-            RenderManager.DrawSprite("turtle_normal", position, size, angle, Color.White, 1);
+            RenderManager.DrawSprite("turtle_normal", position, size, angle + MathHelper.PiOver2, Color.White, 1);
 		}
     }
 }
