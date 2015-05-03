@@ -20,8 +20,10 @@ namespace MechaWarner
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
         public static Random rand = new Random();
-        double oldtime;
-        Boolean oldTimeSet = false;
+        double oldTurtleTime;
+        Boolean oldTurtleTimeSet = false;
+        double oldFlyTime;
+        Boolean oldFlyTimeSet = false;
 
 		// Delta time - used for framerate independence.
 		float dt;
@@ -127,17 +129,30 @@ namespace MechaWarner
 			objectsToAdd.Clear();
 
             //create turtles
-            if (!oldTimeSet)
+            if (!oldTurtleTimeSet)
             {
-                oldtime = gameTime.TotalGameTime.TotalMilliseconds;
-                oldTimeSet = true;
+                oldTurtleTime = gameTime.TotalGameTime.TotalMilliseconds;
+                oldTurtleTimeSet = true;
             }
-            if (gameTime.TotalGameTime.TotalMilliseconds - oldtime > 5000)
+            if (gameTime.TotalGameTime.TotalMilliseconds - oldTurtleTime > 5000)
             {
                 Vector2[] corners = { new Vector2(0, 0), new Vector2(0, 270), new Vector2(480, 0), new Vector2(480, 270) };
                 Enemy e = new Enemy(corners[rand.Next(0, 3)], new Vector2(64, 64));
                 gameObjects.Add(e);
-                oldtime = gameTime.TotalGameTime.TotalMilliseconds;
+                oldTurtleTime = gameTime.TotalGameTime.TotalMilliseconds;
+            }
+
+            if (!oldFlyTimeSet)
+            {
+                oldFlyTime = gameTime.TotalGameTime.TotalMilliseconds;
+                oldFlyTimeSet = true;
+            }
+            if (gameTime.TotalGameTime.TotalMilliseconds - oldFlyTime > 2000)
+            {
+                Vector2[] corners = { new Vector2(0, 0), new Vector2(0, 270), new Vector2(480, 0), new Vector2(480, 270) };
+                Fly f = new Fly(corners[rand.Next(0, 3)], new Vector2(9, 9));
+                gameObjects.Add(f);
+                oldFlyTime = gameTime.TotalGameTime.TotalMilliseconds;
             }
 
 

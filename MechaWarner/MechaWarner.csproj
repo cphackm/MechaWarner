@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="Bubble.cs" />
     <Compile Include="Enemy.cs" />
+    <Compile Include="Fly.cs" />
     <Compile Include="Framework\GameObject.cs" />
     <Compile Include="Framework\RenderManager.cs" />
     <Compile Include="Game1.cs" />
@@ -78,6 +79,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\pixelFont.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\fly.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
