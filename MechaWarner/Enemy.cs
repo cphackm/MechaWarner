@@ -13,13 +13,27 @@ namespace MechaWarner
         public Vector2 velocity;
         public float angle;
         public float speed;
+        public int health;
+        public bool alreadySplit = false;
         public Enemy(Vector2 Position, Vector2 Size) : base(Position, Size, 2)
 		{
             angle = (float)Game1.rand.NextDouble() * MathHelper.TwoPi;
             speed = (float)Game1.rand.Next(1, 200);
             velocity.X = (float) Math.Cos(angle) * speed;
             velocity.Y = (float)Math.Sin(angle) * speed;
+            health = 2;
 		}
+
+        public Enemy(Vector2 Position, Vector2 Size, bool alreadySplit)
+            : base(Position, Size, 2)
+        {
+            angle = (float)Game1.rand.NextDouble() * MathHelper.TwoPi;
+            speed = (float)Game1.rand.Next(1, 200);
+            velocity.X = (float)Math.Cos(angle) * speed;
+            velocity.Y = (float)Math.Sin(angle) * speed;
+            health = 2;
+            this.alreadySplit = alreadySplit;
+        }
 
 		public override void Update(float DT)
 		{
@@ -48,5 +62,22 @@ namespace MechaWarner
 		{
             RenderManager.DrawSprite("turtle_normal", position, size, angle + MathHelper.PiOver2, Color.White, 1);
 		}
+
+        public void attack()
+        {
+            health -= 1;
+            if(health < 0)
+            {
+                if (!alreadySplit)
+                {
+                    Game1.objectsToAdd.Add(new Enemy(position, size / 2, true));
+                    Game1.objectsToAdd.Add(new Enemy(position, size / 2, true));
+                    Game1.objectsToAdd.Add(new Enemy(position, size / 2, true));
+                    Game1.objectsToRemove.Add(this);
+                }
+                else
+                    Game1.objectsToRemove.Add(this);
+            }
+        }
     }
 }
