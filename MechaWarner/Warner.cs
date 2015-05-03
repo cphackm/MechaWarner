@@ -16,7 +16,7 @@ namespace MechaWarner
 		public const float MAX_SPEED = 200.0f;
 		public Vector2 velocity;
 		public float angle;
-        public Boolean isInvincible;
+        public Boolean isInvincible = true;
         float timer;
 
 		public Warner(Vector2 Position) : base(Position, new Vector2(33, 33), 5)
@@ -71,6 +71,7 @@ namespace MechaWarner
 
 			// Create a bubble trail
 
+            //Make him invincible (sometimes)
             if(isInvincible)
             {
                 timer -= DT;

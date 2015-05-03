@@ -80,6 +80,7 @@ namespace MechaWarner
 			RenderManager.LoadTexture("sprite_bubblelarge", "bubble_large");
 			RenderManager.LoadTexture("sprite_bubblesmall", "bubble_small");
             RenderManager.LoadTexture("turtle", "turtle_normal");
+            RenderManager.LoadFont("pixelFont", "pixel_font");
 		}
 
 		/// <summary>
@@ -134,8 +135,6 @@ namespace MechaWarner
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime)
 		{
-			GraphicsDevice.Clear(Color.CornflowerBlue);
-
 			// Begin the sprite batch operation
 			GraphicsDevice.SetRenderTarget(smallTarget);
 			GraphicsDevice.Clear(Color.DarkBlue);
@@ -146,6 +145,8 @@ namespace MechaWarner
 			{
 				g.Render();
 			}
+
+            RenderManager.DrawFont("pixel_font", Vector2.Zero, "Warner's Health: " + warner.health, Color.LightBlue, 0, 0.5f);
 
 			// End the sprite batch operation
 			RenderManager.sb.End();
