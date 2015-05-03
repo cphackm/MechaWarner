@@ -37,7 +37,7 @@ namespace MechaWarner
 
 		public override void Render()
 		{
-            RenderManager.DrawSprite("turtle_normal", position, size, angle, Color.White, 0);
+            RenderManager.DrawSprite("turtle_normal", position, size, angle, Color.White, 1);
 		}
     }
 }

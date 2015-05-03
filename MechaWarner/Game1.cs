@@ -116,7 +116,7 @@ namespace MechaWarner
                 oldtime = gameTime.TotalGameTime.TotalMilliseconds;
                 oldTimeSet = true;
             }
-            if (gameTime.TotalGameTime.TotalMilliseconds - oldtime > 1000)
+            if (gameTime.TotalGameTime.TotalMilliseconds - oldtime > 5000)
             {
                 Vector2[] corners = { new Vector2(0, 0), new Vector2(0, 270), new Vector2(480, 0), new Vector2(480, 270) };
                 Enemy e = new Enemy(corners[rand.Next(0, 3)], new Vector2(64, 64));
