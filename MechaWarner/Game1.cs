@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
+using MechaWarner.Framework;
 #endregion
 
 namespace MechaWarner
@@ -19,11 +20,20 @@ namespace MechaWarner
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 
-		public Game1()
-			: base()
+		// Delta time - used for framerate independence.
+		float dt;
+
+		// List of game objects to keep track of
+		List<GameObject> gameObjects;
+
+		public Game1() : base()
 		{
+			// Create the graphics and content
 			graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
+
+			// Create the list of game objects
+			gameObjects = new List<GameObject>();
 		}
 
 		/// <summary>
@@ -70,7 +80,8 @@ namespace MechaWarner
 			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
 				Exit();
 
-			// TODO: Add your update logic here
+			// Update the delta time
+			dt = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000.0f;
 
 			base.Update(gameTime);
 		}
