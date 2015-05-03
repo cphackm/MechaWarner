@@ -70,6 +70,13 @@ namespace MechaWarner
 			}
 
 			// Create a bubble trail
+			if (isAccelerating)
+			{
+				float addAngle = (float)Game1.rand.Next(-30, 30) / 90.0f;
+				Vector2 bVel = new Vector2((float)Math.Cos(angle + addAngle + MathHelper.Pi), (float)Math.Sin(angle + addAngle + MathHelper.Pi)) * 100.0f;
+				Vector2 bPos = position + new Vector2(16.0f * (float)Math.Cos(angle + MathHelper.Pi), 16.0f * (float)Math.Sin(angle + MathHelper.Pi));
+				Game1.objectsToAdd.Add(new Bubble(bPos, bVel));
+			}
 
             if(isInvincible)
             {

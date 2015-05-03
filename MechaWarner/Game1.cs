@@ -28,6 +28,7 @@ namespace MechaWarner
 
 		// List of game objects to keep track of
 		public static List<GameObject> gameObjects;
+		public static List<GameObject> objectsToAdd;
 		public static Warner warner;
 
 		// Render target for scaling
@@ -43,6 +44,7 @@ namespace MechaWarner
 
 			// Create the list of game objects
 			gameObjects = new List<GameObject>();
+			objectsToAdd = new List<GameObject>();
 
 			// Create warner
 			warner = new Warner(new Vector2(240, 135));
@@ -109,6 +111,11 @@ namespace MechaWarner
 			{
 				g.Update(dt);
 			}
+			foreach (GameObject g in objectsToAdd)
+			{
+				gameObjects.Add(g);
+			}
+			objectsToAdd.Clear();
 
             //create turtles
             if (!oldTimeSet)
