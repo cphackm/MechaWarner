@@ -177,8 +177,6 @@ namespace MechaWarner
 				g.Render();
 			}
 
-            RenderManager.DrawFont("pixel_font", Vector2.Zero, "Warner's Health: " + warner.health, Color.White, 0, 0.5f);
-
 			// End the sprite batch operation
 			RenderManager.sb.End();
 
@@ -189,9 +187,11 @@ namespace MechaWarner
 			{
 				int ripple = (int)(Math.Cos((i + gameTime.TotalGameTime.TotalMilliseconds / 20.0) / 2.0) * 4);
 				RenderManager.sb.Draw(smallTarget, new Rectangle(ripple, i * 4, 960, 4), new Rectangle(0, i * 2, 480, 2), Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 1.0f);
+                if (warner.health < 1)
+                    gameOver();
 			}
 			//RenderManager.sb.Draw(smallTarget, new Rectangle(0, 0, 960, 540), Color.White);
-			RenderManager.DrawFont("pixel_font", Vector2.Zero, "Warner's Health: " + warner.health, Color.LightBlue, 0, 1.0f);
+			RenderManager.DrawFont("pixel_font", Vector2.Zero, "Warner's Health: " + warner.health, Color.White, 0, 1.0f);
 			RenderManager.sb.End();
 
 			base.Draw(gameTime);
@@ -199,11 +199,8 @@ namespace MechaWarner
 
         public static void gameOver()
         {
-            RenderManager.sb.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
-
-            RenderManager.DrawFont("pixel_font", new Vector2(240, 135), "GAME OVER", Color.White, 0, 0.5f);
-
-            RenderManager.sb.End();
+            Vector2 size = RenderManager.fonts["pixel_font"].MeasureString("GAME OVER");
+            RenderManager.DrawFont("pixel_font", new Vector2((960 / 2) - (size.X / 2), (540 / 2) - (size.Y / 2)), "GAME OVER", Color.White, 0, 2f);
         }
 	}
 }
