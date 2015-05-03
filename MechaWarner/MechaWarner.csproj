@@ -35,6 +35,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Bubble.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Framework\GameObject.cs" />
     <Compile Include="Framework\RenderManager.cs" />

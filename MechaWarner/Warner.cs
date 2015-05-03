@@ -38,10 +38,14 @@ namespace MechaWarner
 				angle += ROT_SPEED * DT;
 			}
 
+			// Is acceleration
+			bool isAccelerating = false;
+
 			// Acceleration
 			if (k.IsKeyDown(Keys.Up))
 			{
 				velocity += new Vector2((float)Math.Cos(angle) * ACC_SPEED, (float)Math.Sin(angle) * ACC_SPEED) * DT;
+				isAccelerating = true;
 			}
 
 			// Cap the speed
@@ -62,6 +66,9 @@ namespace MechaWarner
 			{
 				position.Y -= Math.Sign(position.Y) * (270 + size.Y / 2);
 			}
+
+			// Create a bubble trail
+
 		}
 
 		public override void Render()
