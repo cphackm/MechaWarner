@@ -25,6 +25,7 @@ namespace MechaWarner
 		public int currentFrame;
 		public float frameTimer;
 
+		public int flashThingy;
 
 		public Warner(Vector2 Position) : base(Position, new Vector2(33, 33), 5)
 		{
@@ -35,6 +36,7 @@ namespace MechaWarner
 			isTongueOut = false;
 			currentFrame = 0;
 			frameTimer = 0.0f;
+			flashThingy = 0;
 		}
 
 		public override void Update(float DT)
@@ -149,13 +151,14 @@ namespace MechaWarner
             //Make him invincible (sometimes)
             if(isInvincible)
             {
+				flashThingy = (flashThingy + 1) % 6;
                 timer -= DT;
                 if (timer < 0)
                 {
+					flashThingy = 0;
                     isInvincible = false;
                     timer = 1;
                 }
-
             }
 
 			// Check death condition
@@ -185,6 +188,7 @@ namespace MechaWarner
 
 		public override void Render()
 		{
+			if (!isInvincible || (isInvincible && flashThingy > 2))
 			RenderManager.DrawSprite("warner_normal", position, size, angle + MathHelper.PiOver2, Color.White, 0.0f);
 			if (isTongueOut)
 			{
