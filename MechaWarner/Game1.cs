@@ -84,6 +84,7 @@ namespace MechaWarner
 			RenderManager.LoadTexture("sprite_bubblelarge", "bubble_large");
 			RenderManager.LoadTexture("sprite_bubblesmall", "bubble_small");
             RenderManager.LoadTexture("turtle", "turtle_normal");
+            RenderManager.LoadTexture("fly", "fly_normal");
             RenderManager.LoadFont("pixelFont", "pixel_font");
 		}
 
