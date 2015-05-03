@@ -28,6 +28,7 @@ namespace MechaWarner
 			if (opacity < 0.0f)
 			{
 				opacity = 0.0f;
+				Game1.objectsToRemove.Add(this);
 			}
 
 			position += velocity * DT;

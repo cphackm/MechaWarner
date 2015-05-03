@@ -29,6 +29,7 @@ namespace MechaWarner
 		// List of game objects to keep track of
 		public static List<GameObject> gameObjects;
 		public static List<GameObject> objectsToAdd;
+		public static List<GameObject> objectsToRemove;
 		public static Warner warner;
 
 		// Render target for scaling
@@ -45,6 +46,7 @@ namespace MechaWarner
 			// Create the list of game objects
 			gameObjects = new List<GameObject>();
 			objectsToAdd = new List<GameObject>();
+			objectsToRemove = new List<GameObject>();
 
 			// Create warner
 			warner = new Warner(new Vector2(240, 135));
@@ -115,6 +117,10 @@ namespace MechaWarner
 			foreach (GameObject g in objectsToAdd)
 			{
 				gameObjects.Add(g);
+			}
+			foreach (GameObject g in objectsToRemove)
+			{
+				gameObjects.Remove(g);
 			}
 			objectsToAdd.Clear();
 
