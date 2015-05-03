@@ -176,17 +176,20 @@ namespace MechaWarner
 				g.Render();
 			}
 
-            RenderManager.DrawFont("pixel_font", Vector2.Zero, "Warner's Health: " + warner.health, Color.LightBlue, 0, 0.5f);
-
 			// End the sprite batch operation
 			RenderManager.sb.End();
 
 			// Draw the small target scaled up onto the back buffer
 			GraphicsDevice.SetRenderTarget(null);
 			RenderManager.sb.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
-			RenderManager.sb.Draw(smallTarget, new Rectangle(0, 0, 960, 540), Color.White);
+			for (int i = 0; i < 135; i++)
+			{
+				int ripple = (int)(Math.Cos((i + gameTime.TotalGameTime.TotalMilliseconds / 20.0) / 2.0) * 5);
+				RenderManager.sb.Draw(smallTarget, new Rectangle(ripple, i * 4, 960, 4), new Rectangle(0, i * 2, 480, 2), Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 1.0f);
+			}
+			//RenderManager.sb.Draw(smallTarget, new Rectangle(0, 0, 960, 540), Color.White);
+			RenderManager.DrawFont("pixel_font", Vector2.Zero, "Warner's Health: " + warner.health, Color.LightBlue, 0, 1.0f);
 			RenderManager.sb.End();
-
 
 			base.Draw(gameTime);
 		}
