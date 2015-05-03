@@ -33,6 +33,11 @@ namespace MechaWarner
             velocity.Y = (float)Math.Sin(angle) * speed;
             health = 2;
             this.alreadySplit = alreadySplit;
+
+			if (this.alreadySplit)
+			{
+				health = 1;
+			}
         }
 
 		public override void Update(float DT)

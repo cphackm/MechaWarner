@@ -85,6 +85,7 @@ namespace MechaWarner
 			RenderManager.LoadTexture("sprite_bubblesmall", "bubble_small");
             RenderManager.LoadTexture("turtle", "turtle_normal");
             RenderManager.LoadTexture("fly", "fly_normal");
+			RenderManager.LoadTexture("matingcall", "horny_beam");
             RenderManager.LoadFont("pixelFont", "pixel_font");
 		}
 
@@ -151,7 +152,7 @@ namespace MechaWarner
 		{
 			// Begin the sprite batch operation
 			GraphicsDevice.SetRenderTarget(smallTarget);
-			GraphicsDevice.Clear(Color.DarkBlue);
+			GraphicsDevice.Clear(Color.CornflowerBlue);
 			RenderManager.sb.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
 
 			// Draw all game objects
