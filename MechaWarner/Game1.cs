@@ -176,7 +176,7 @@ namespace MechaWarner
 				g.Render();
 			}
 
-            RenderManager.DrawFont("pixel_font", Vector2.Zero, "Warner's Health: " + warner.health, Color.LightBlue, 0, 0.5f);
+            RenderManager.DrawFont("pixel_font", Vector2.Zero, "Warner's Health: " + warner.health, Color.White, 0, 0.5f);
 
 			// End the sprite batch operation
 			RenderManager.sb.End();
@@ -190,5 +190,14 @@ namespace MechaWarner
 
 			base.Draw(gameTime);
 		}
+
+        public static void gameOver()
+        {
+            RenderManager.sb.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
+
+            RenderManager.DrawFont("pixel_font", new Vector2(240, 135), "GAME OVER", Color.White, 0, 0.5f);
+
+            RenderManager.sb.End();
+        }
 	}
 }
