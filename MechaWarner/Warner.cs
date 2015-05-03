@@ -181,7 +181,6 @@ namespace MechaWarner
 						Vector2 bv = new Vector2((float)Math.Cos(ba), (float)Math.Sin(ba)) * bs;
 						Game1.objectsToAdd.Add(new Bubble(position, bv));
 					}
-                    Game1.gameOver();
 					Game1.objectsToRemove.Add(this);
 				}
 			}
