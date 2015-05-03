@@ -11,7 +11,9 @@ namespace MechaWarner
 {
 	public class Warner : GameObject
 	{
-		public const float ROT_SPEED = MathHelper.Pi;
+		public const float ROT_SPEED = MathHelper.Pi * 1.5f;
+		public const float ACC_SPEED = 150.0f;
+		public const float MAX_SPEED = 200.0f;
 		public Vector2 velocity;
 		public float angle;
 
@@ -29,10 +31,37 @@ namespace MechaWarner
 			// Rotation
 			if (k.IsKeyDown(Keys.Left))
 			{
-				angle += 
+				angle -= ROT_SPEED * DT;
+			}
+			else if (k.IsKeyDown(Keys.Right))
+			{
+				angle += ROT_SPEED * DT;
+			}
+
+			// Acceleration
+			if (k.IsKeyDown(Keys.Up))
+			{
+				velocity += new Vector2((float)Math.Cos(angle) * ACC_SPEED, (float)Math.Sin(angle) * ACC_SPEED) * DT;
+			}
+
+			// Cap the speed
+			if (velocity.Length() > MAX_SPEED)
+			{
+				velocity.Normalize();
+				velocity *= MAX_SPEED;
 			}
 
 			position += velocity * DT;
+
+			// Wrap his bombin' position
+			if (position.X > 480 + size.X / 2 || position.X < -(size.X / 2))
+			{
+				position.X -= Math.Sign(position.X) * (480 + size.X / 2);
+			}
+			if (position.Y > 270 + size.Y / 2 || position.Y < -(size.Y / 2))
+			{
+				position.Y -= Math.Sign(position.Y) * (270 + size.Y / 2);
+			}
 		}
 
 		public override void Render()
