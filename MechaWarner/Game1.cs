@@ -14,10 +14,12 @@ namespace MechaWarner
 	/// <summary>
 	/// This is the main type for your game
 	/// </summary>
+    /// 
 	public class Game1 : Game
 	{
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
+        public static Random rand = new Random();
 
 		// Delta time - used for framerate independence.
 		float dt;
@@ -62,6 +64,7 @@ namespace MechaWarner
 			RenderManager.LoadTexture("mechawarner", "warner_normal");
 			RenderManager.LoadTexture("sprite_bubblelarge", "bubble_large");
 			RenderManager.LoadTexture("sprite_bubblesmall", "bubble_small");
+            RenderManager.LoadTexture("turtle", "turtle_normal");
 		}
 
 		/// <summary>
@@ -98,6 +101,7 @@ namespace MechaWarner
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
 			// TODO: Add your drawing code here
+
 
 			base.Draw(gameTime);
 		}
