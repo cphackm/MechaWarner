@@ -20,6 +20,8 @@ namespace MechaWarner
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
         public static Random rand = new Random();
+        double oldtime;
+        Boolean oldTimeSet = false;
 
 		// Delta time - used for framerate independence.
 		float dt;
@@ -107,6 +109,21 @@ namespace MechaWarner
 			{
 				g.Update(dt);
 			}
+
+            //create turtles
+            if (!oldTimeSet)
+            {
+                oldtime = gameTime.TotalGameTime.TotalMilliseconds;
+                oldTimeSet = true;
+            }
+            if (gameTime.TotalGameTime.TotalMilliseconds - oldtime > 1000)
+            {
+                Vector2[] corners = { new Vector2(0, 0), new Vector2(0, 270), new Vector2(480, 0), new Vector2(480, 270) };
+                Enemy e = new Enemy(corners[rand.Next(0, 3)], new Vector2(64, 64));
+                gameObjects.Add(e);
+                oldtime = gameTime.TotalGameTime.TotalMilliseconds;
+            }
+
 
 			base.Update(gameTime);
 		}
