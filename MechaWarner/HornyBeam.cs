@@ -23,6 +23,20 @@ namespace MechaWarner
 		public override void Update(float DT)
 		{
 			position += velocity * DT;
+
+			// Collisions
+			foreach (GameObject g in Game1.gameObjects)
+			{
+				if (typeof(Enemy).Equals(g.GetType()))
+				{
+					if (Vector2.Distance(position, g.position) < (g.size.X / 2 - 6))
+					{
+						(g as Enemy).attack();
+						Game1.objectsToRemove.Add(this);
+						break;
+					}
+				}
+			}
 		}
 
 		public override void Render()
