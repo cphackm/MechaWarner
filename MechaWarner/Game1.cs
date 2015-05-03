@@ -214,6 +214,7 @@ namespace MechaWarner
 			}
 			//RenderManager.sb.Draw(smallTarget, new Rectangle(0, 0, 960, 540), Color.White);
 			RenderManager.DrawFont("pixel_font", Vector2.Zero, "Warner's Health: " + warner.health, Color.White, 0, 1.0f);
+			RenderManager.DrawFont("pixel_font", new Vector2(400, 0), "Score: " + warner.score, Color.White, 0, 1.0f);
 			RenderManager.sb.End();
 
 			base.Draw(gameTime);

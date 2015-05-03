@@ -68,7 +68,7 @@ namespace MechaWarner
             RenderManager.DrawSprite("turtle_normal", position, size, angle + MathHelper.PiOver2, Color.White, 0.9f);
 		}
 
-        public bool attack()
+        public int attack()
         {
             health -= 1;
             if(health < 0)
@@ -99,10 +99,10 @@ namespace MechaWarner
 					Game1.objectsToRemove.Add(this);
 				}
 
-				return true;
+				return alreadySplit ? 10 : 20;
             }
 
-			return false;
+			return 0;
         }
     }
 }

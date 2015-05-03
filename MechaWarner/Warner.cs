@@ -27,6 +27,8 @@ namespace MechaWarner
 
 		public int flashThingy;
 
+		public int score;
+
 		public Warner(Vector2 Position) : base(Position, new Vector2(33, 33), 5)
 		{
 			velocity = Vector2.Zero;
@@ -37,6 +39,7 @@ namespace MechaWarner
 			currentFrame = 0;
 			frameTimer = 0.0f;
 			flashThingy = 0;
+			score = 0;
 		}
 
 		public override void Update(float DT)
@@ -134,6 +137,7 @@ namespace MechaWarner
 						if (Vector2.Distance(tonguePos, g.position) < 16.0f)
 						{
 							(g as Fly).eat();
+							score += 30;
 						}
 					}
 				}

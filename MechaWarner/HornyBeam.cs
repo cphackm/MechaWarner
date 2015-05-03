@@ -31,7 +31,7 @@ namespace MechaWarner
 				{
 					if (Vector2.Distance(position, g.position) < (g.size.X / 2 - 6))
 					{
-						(g as Enemy).attack();
+						Game1.warner.score += (g as Enemy).attack();
 						Game1.objectsToRemove.Add(this);
 						break;
 					}
