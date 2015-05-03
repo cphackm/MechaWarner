@@ -65,7 +65,7 @@ namespace MechaWarner
 
 		public override void Render()
 		{
-            RenderManager.DrawSprite("turtle_normal", position, size, angle + MathHelper.PiOver2, Color.White, 1);
+            RenderManager.DrawSprite("turtle_normal", position, size, angle + MathHelper.PiOver2, Color.White, 0.9f);
 		}
 
         public bool attack()

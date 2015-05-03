@@ -89,6 +89,12 @@ namespace MechaWarner
             RenderManager.LoadTexture("fly", "fly_normal");
 			RenderManager.LoadTexture("matingcall", "horny_beam");
 			RenderManager.LoadTexture("mechatongue", "mechatongue");
+            RenderManager.LoadTexture("mechasand", "mechasand");
+            RenderManager.LoadTexture("mecharocks1", "mecharocks1");
+            RenderManager.LoadTexture("mecharocks2", "mecharocks2");
+            RenderManager.LoadTexture("mecharocks3", "mecharocks3");
+            RenderManager.LoadTexture("mecharocks4", "mecharocks4");
+            RenderManager.LoadTexture("mecharocks5", "mecharocks5");
             RenderManager.LoadFont("pixelFont", "pixel_font");
 		}
 
@@ -135,7 +141,7 @@ namespace MechaWarner
                 oldTurtleTime = gameTime.TotalGameTime.TotalMilliseconds;
                 oldTurtleTimeSet = true;
             }
-            if (gameTime.TotalGameTime.TotalMilliseconds - oldTurtleTime > 5000)
+            if (gameTime.TotalGameTime.TotalMilliseconds - oldTurtleTime > 1000)
             {
                 Vector2[] corners = { new Vector2(0, 0), new Vector2(0, 270), new Vector2(480, 0), new Vector2(480, 270) };
                 Enemy e = new Enemy(corners[rand.Next(0, 3)], new Vector2(64, 64));
@@ -148,7 +154,7 @@ namespace MechaWarner
                 oldFlyTime = gameTime.TotalGameTime.TotalMilliseconds;
                 oldFlyTimeSet = true;
             }
-            if (gameTime.TotalGameTime.TotalMilliseconds - oldFlyTime > 2000)
+            if (gameTime.TotalGameTime.TotalMilliseconds - oldFlyTime > 10000)
             {
                 Vector2[] corners = { new Vector2(0, 0), new Vector2(0, 270), new Vector2(480, 0), new Vector2(480, 270) };
                 Fly f = new Fly(corners[rand.Next(0, 3)], new Vector2(9, 9));
@@ -168,8 +174,24 @@ namespace MechaWarner
 		{
 			// Begin the sprite batch operation
 			GraphicsDevice.SetRenderTarget(smallTarget);
-			GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.White);
+
 			RenderManager.sb.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
+
+            //Draw background
+            for (int i = 0; i <= (480 / 32) + 1; i++)
+            {
+                for (int j = 0; j <= (270 / 32) + 1; j++)
+                {
+                    RenderManager.DrawSprite("mechasand", new Vector2(i * 32, j * 32), new Vector2(32, 32), 0, (Color.CornflowerBlue)*0.75f, 1);
+                }
+            }
+
+            RenderManager.DrawSprite("mecharocks1", new Vector2(30, 30), new Vector2(64, 64), 0, Color.White, 0.99f);
+            RenderManager.DrawSprite("mecharocks2", new Vector2(100, 250), new Vector2(128, 128), 0, Color.White, 0.99f);
+            RenderManager.DrawSprite("mecharocks3", new Vector2(346, 20), new Vector2(128, 128), 0, Color.White, 0.99f);
+            RenderManager.DrawSprite("mecharocks4", new Vector2(259, 102), new Vector2(32, 32), 0, Color.White, 0.99f);
+            RenderManager.DrawSprite("mecharocks5", new Vector2(380, 240), new Vector2(64, 64), 0, Color.White, 0.99f);
 
 			// Draw all game objects
 			foreach (GameObject g in gameObjects)
@@ -199,8 +221,8 @@ namespace MechaWarner
 
         public static void gameOver()
         {
-            Vector2 size = RenderManager.fonts["pixel_font"].MeasureString("GAME OVER");
-            RenderManager.DrawFont("pixel_font", new Vector2((960 / 2) - (size.X / 2), (540 / 2) - (size.Y / 2)), "GAME OVER", Color.White, 0, 2f);
+            Vector2 size = (RenderManager.fonts["pixel_font"].MeasureString("GAME OVER"))*2;
+            RenderManager.DrawFont("pixel_font", new Vector2((960 / 2) - (size.X / 2), (540 / 2) - (size.Y / 2)), "GAME OVER", Color.White, 0, 2.0f);
         }
 	}
 }
