@@ -68,7 +68,7 @@ namespace MechaWarner
             RenderManager.DrawSprite("turtle_normal", position, size, angle + MathHelper.PiOver2, Color.White, 1);
 		}
 
-        public void attack()
+        public bool attack()
         {
             health -= 1;
             if(health < 0)
@@ -82,7 +82,11 @@ namespace MechaWarner
                 }
                 else
                     Game1.objectsToRemove.Add(this);
+
+				return true;
             }
+
+			return false;
         }
     }
 }

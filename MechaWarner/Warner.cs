@@ -106,6 +106,29 @@ namespace MechaWarner
 
             }
 
+			// Check death condition
+			if (health <= 0)
+			{
+				isInvincible = true;
+				if (Game1.gameObjects.Contains(this))
+				{
+					for (int i = 0; i < 100; i++)
+					{
+						float bs = (float)Game1.rand.Next(50) + 200f;
+						float ba = (float)Game1.rand.NextDouble() * MathHelper.TwoPi;
+						Vector2 bv = new Vector2((float)Math.Cos(ba), (float)Math.Sin(ba)) * bs;
+						Game1.objectsToAdd.Add(new Bubble(position, bv));
+					}
+					for (int i = 0; i < 100; i++)
+					{
+						float bs = (float)Game1.rand.Next(200) + 50.0f;
+						float ba = (float)Game1.rand.NextDouble() * MathHelper.TwoPi;
+						Vector2 bv = new Vector2((float)Math.Cos(ba), (float)Math.Sin(ba)) * bs;
+						Game1.objectsToAdd.Add(new Bubble(position, bv));
+					}
+					Game1.objectsToRemove.Add(this);
+				}
+			}
 		}
 
 		public override void Render()
