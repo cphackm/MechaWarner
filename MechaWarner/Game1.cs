@@ -45,6 +45,7 @@ namespace MechaWarner
 		protected override void Initialize()
 		{
 			// TODO: Add your initialization logic here
+			RenderManager.Initialize(GraphicsDevice, this.Content);
 
 			base.Initialize();
 		}
@@ -58,7 +59,10 @@ namespace MechaWarner
 			// Create a new SpriteBatch, which can be used to draw textures.
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
-			// TODO: use this.Content to load your game content here
+			// Load content here
+			RenderManager.LoadTexture("Content/mechawarner", "warner_normal");
+			RenderManager.LoadTexture("Content/sprite_bubblelarge", "bubble_large");
+			RenderManager.LoadTexture("Content/sprite_bubblesmall", "bubble_small");
 		}
 
 		/// <summary>
