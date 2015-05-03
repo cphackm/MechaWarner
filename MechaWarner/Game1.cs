@@ -88,6 +88,7 @@ namespace MechaWarner
             RenderManager.LoadTexture("turtle", "turtle_normal");
             RenderManager.LoadTexture("fly", "fly_normal");
 			RenderManager.LoadTexture("matingcall", "horny_beam");
+			RenderManager.LoadTexture("mechatongue", "mechatongue");
             RenderManager.LoadFont("pixelFont", "pixel_font");
 		}
 
@@ -184,7 +185,7 @@ namespace MechaWarner
 			RenderManager.sb.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
 			for (int i = 0; i < 135; i++)
 			{
-				int ripple = (int)(Math.Cos((i + gameTime.TotalGameTime.TotalMilliseconds / 20.0) / 2.0) * 5);
+				int ripple = (int)(Math.Cos((i + gameTime.TotalGameTime.TotalMilliseconds / 20.0) / 2.0) * 4);
 				RenderManager.sb.Draw(smallTarget, new Rectangle(ripple, i * 4, 960, 4), new Rectangle(0, i * 2, 480, 2), Color.White, 0.0f, Vector2.Zero, SpriteEffects.None, 1.0f);
 			}
 			//RenderManager.sb.Draw(smallTarget, new Rectangle(0, 0, 960, 540), Color.White);

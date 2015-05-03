@@ -20,11 +20,21 @@ namespace MechaWarner
 		public bool isSpaceHeld;
         float timer;
 
+		public bool isTongueKeyHeld;
+		public bool isTongueOut;
+		public int currentFrame;
+		public float frameTimer;
+
+
 		public Warner(Vector2 Position) : base(Position, new Vector2(33, 33), 5)
 		{
 			velocity = Vector2.Zero;
 			angle = 0.0f;
 			isSpaceHeld = false;
+			isTongueKeyHeld = false;
+			isTongueOut = false;
+			currentFrame = 0;
+			frameTimer = 0.0f;
 		}
 
 		public override void Update(float DT)
@@ -72,7 +82,7 @@ namespace MechaWarner
 			}
 
 			// Firing
-			if (k.IsKeyDown(Keys.Space))
+			if (k.IsKeyDown(Keys.F))
 			{
 				if (!isSpaceHeld)
 				{
@@ -83,6 +93,48 @@ namespace MechaWarner
 			else
 			{
 				isSpaceHeld = false;
+			}
+
+			// Tongue stuff
+			if (k.IsKeyDown(Keys.A))
+			{
+				if (!isTongueKeyHeld)
+				{
+					isTongueOut = true;
+				}
+				isTongueKeyHeld = true;
+			}
+			else
+			{
+				isTongueKeyHeld = false;
+			}
+
+			if (isTongueOut)
+			{
+				frameTimer += DT * 15.0f;
+				if (frameTimer >= 1.0f)
+				{
+					frameTimer = 0.0f;
+					currentFrame++;
+					if (currentFrame > 3)
+					{
+						isTongueOut = false;
+						currentFrame = 0;
+					}
+				}
+
+				// Check for collision with flies
+				foreach (GameObject g in Game1.gameObjects)
+				{
+					if (typeof(Fly).Equals(g.GetType()))
+					{
+						Vector2 tonguePos = position + new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * 21.0f;
+						if (Vector2.Distance(tonguePos, g.position) < 16.0f)
+						{
+							(g as Fly).eat();
+						}
+					}
+				}
 			}
 
 			// Create a bubble trail
@@ -134,6 +186,11 @@ namespace MechaWarner
 		public override void Render()
 		{
 			RenderManager.DrawSprite("warner_normal", position, size, angle + MathHelper.PiOver2, Color.White, 0.0f);
+			if (isTongueOut)
+			{
+				Vector2 tonguePos = position + new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * 13.0f;
+				RenderManager.sb.Draw(RenderManager.textures["mechatongue"], new Rectangle((int)tonguePos.X, (int)tonguePos.Y, 6, 16), new Rectangle(currentFrame * 6, 0, 6, 16), Color.White, angle + MathHelper.PiOver2, new Vector2(3, 16), SpriteEffects.None, 0.0f);
+			}
 		}
 	}
 }
