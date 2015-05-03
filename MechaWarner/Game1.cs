@@ -60,9 +60,9 @@ namespace MechaWarner
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
 			// Load content here
-			RenderManager.LoadTexture("Content/mechawarner", "warner_normal");
-			RenderManager.LoadTexture("Content/sprite_bubblelarge", "bubble_large");
-			RenderManager.LoadTexture("Content/sprite_bubblesmall", "bubble_small");
+			RenderManager.LoadTexture("mechawarner", "warner_normal");
+			RenderManager.LoadTexture("sprite_bubblelarge", "bubble_large");
+			RenderManager.LoadTexture("sprite_bubblesmall", "bubble_small");
 		}
 
 		/// <summary>
