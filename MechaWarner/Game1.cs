@@ -165,7 +165,7 @@ namespace MechaWarner
                 gameObjects.Add(f);
                 oldFlyTime = gameTime.TotalGameTime.TotalMilliseconds;
             }
-
+                
 
 			base.Update(gameTime);
 		}
