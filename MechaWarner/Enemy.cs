@@ -80,6 +80,20 @@ namespace MechaWarner
                     {
                         Game1.objectsToAdd.Add(new Enemy(position, size / 2, true));
                     }
+					for (int i = 0; i < 100; i++)
+					{
+						float bs = (float)Game1.rand.Next(25) + 100f;
+						float ba = (float)Game1.rand.NextDouble() * MathHelper.TwoPi;
+						Vector2 bv = new Vector2((float)Math.Cos(ba), (float)Math.Sin(ba)) * bs;
+						Game1.objectsToAdd.Add(new Bubble(position, bv));
+					}
+					for (int i = 0; i < 100; i++)
+					{
+						float bs = (float)Game1.rand.Next(100) + 25.0f;
+						float ba = (float)Game1.rand.NextDouble() * MathHelper.TwoPi;
+						Vector2 bv = new Vector2((float)Math.Cos(ba), (float)Math.Sin(ba)) * bs;
+						Game1.objectsToAdd.Add(new Bubble(position, bv));
+					}
                     Game1.objectsToRemove.Add(this);
 				}
 				else

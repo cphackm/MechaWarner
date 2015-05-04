@@ -44,7 +44,11 @@ namespace MechaWarner
 			graphics.PreferredBackBufferWidth = 960;
 			graphics.PreferredBackBufferHeight = 540;
 			Content.RootDirectory = "Content";
+			SetupGame();
+		}
 
+		public static void SetupGame()
+		{
 			// Create the list of game objects
 			gameObjects = new List<GameObject>();
 			objectsToAdd = new List<GameObject>();
@@ -222,6 +226,11 @@ namespace MechaWarner
 
         public static void gameOver()
         {
+			KeyboardState k = Keyboard.GetState();
+			if (k.IsKeyDown(Keys.Space))
+			{
+				SetupGame();
+			}
             Vector2 size = (RenderManager.fonts["pixel_font"].MeasureString("GAME OVER"))*2;
             RenderManager.DrawFont("pixel_font", new Vector2((960 / 2) - (size.X / 2), (540 / 2) - (size.Y / 2)), "GAME OVER", Color.White, 0, 2.0f);
         }
